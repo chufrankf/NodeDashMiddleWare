@@ -19,6 +19,9 @@ var port = process.env.PORT || 8080;        // set our port
 // =============================================================================
 var router = express.Router();              // get an instance of the express Router
 
+// Call the allowed functions
+var dash = require('./app/models/dash_contents');
+
 // middleware to use for all requests
 router.use(function(req, res, next) {
     // do logging
@@ -32,6 +35,14 @@ router.get('/', function(req, res) {
 });
 
 // more routes for our API will happen here
+router.post('/dash', function(req, res){
+    res.send('POST request to the dash')
+});
+router.get('/dash',function(req, res){
+    console.log("Fetching dash... ",req.contents); 
+    res.status(200).send(req.contents);
+});
+
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
