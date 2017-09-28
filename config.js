@@ -3,7 +3,8 @@ var config = {
       host: 'localhost',
       username: 'ndev',
       password: 'password',
-      database: 'NodeDashboard'
+      database: 'NodeDashboard',
+      port: 8080
     }
   }
   
