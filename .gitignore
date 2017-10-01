@@ -1,4 +1,4 @@
-# exclude everything except directory foo/bar
 node_modules/
 test_data/
 app-env
+npm-debug.log

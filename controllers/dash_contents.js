@@ -1,3 +1,4 @@
+//Database
 var db = require('../db.js');
 
 exports.findAll = function(req, res) {
@@ -6,7 +7,9 @@ exports.findAll = function(req, res) {
         return res.send(rows);
     });
 };
-exports.findByPk = function(req, res) {
+
+//Actions
+exports.findById = function(req, res) {
     var id = req.query.id;
     var user = req.query.user;
     if(id && user){
