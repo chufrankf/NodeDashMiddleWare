@@ -1,6 +1,6 @@
 var config = {
     default: {
-      host: 'localhost',
+      host: '127.0.0.1',
       username: 'ndev',
       password: 'password',
       database: 'NodeDashboard',

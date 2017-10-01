@@ -11,13 +11,16 @@ app.use(bodyParser.json());
 //Port
 var port = process.env.PORT || config.port;        // set our port
 
-// ** Routers **
+/*
+    Routers
+*/
+
 var router = express.Router();              // get an instance of the express Router
 app.use('/api', router);
 
 // $/api/*
 router.use(function(req, res, next) {
-    console.log('Router hit.');
+    console.log('Router hit: ' + req.url);
     next();
 });
 
@@ -29,9 +32,25 @@ router.get('/', function(req, res) {
 // $/api/dash/
 require('./routes')(router);
 
-//listen
-var server = app.listen(port, function (){
-   var host = server.address().address
-   var port = server.address().port
-   console.log("Example app listening at http://%s:%s", host, port)
+/*
+    Database
+*/
+var db = require('./db');
+
+db.connect(db.SIMPLE, function(err) {
+    if (err) {
+        console.log('Unable to connect to MySQL.')
+        process.exit(1)
+    } else {
+        console.log('Connected to MySQL...')
+    }
 })
+
+/*
+    Start
+*/
+var server = app.listen(port, function (){
+    var host = server.address().address
+    var port = server.address().port
+    console.log("Listening at http://%s:%s", host, port)
+ })
