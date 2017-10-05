@@ -4,7 +4,9 @@ var config = {
       username: 'ndev',
       password: 'password',
       database: 'NodeDashboard',
-      port: 8080
+      port: 8080,
+      token_length: 3600, // 1 hour
+      token_key: process.env.TOKEN
     }
   }
   

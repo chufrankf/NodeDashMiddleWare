@@ -24,6 +24,6 @@ CREATE TABLE IF NOT EXISTS users (
  user_id VARCHAR(30) NOT NULL
 ,pass VARCHAR(30) NOT NULL
 ,email VARCHAR(60) NOT NULL
-,primary key(pass, user_id)
+,primary key(user_id)
 ,unique (email)
 );
