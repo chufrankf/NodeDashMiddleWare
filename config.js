@@ -1,3 +1,7 @@
+if(!process.env.CONSUMER_KEY) {
+  var env = require('./env');
+}
+
 var config = {
     default: {
       host: '127.0.0.1',
@@ -5,8 +9,11 @@ var config = {
       password: 'password',
       database: 'NodeDashboard',
       port: 8080,
+      
+      //Tokens
       token_length: 3600, // 1 hour
-      token_key: process.env.TOKEN
+      token_key: process.env.ACCESS_TOKEN_SECRET,
+      header_tk_id: 'x-access-token'
     }
   }
   

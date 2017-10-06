@@ -3,7 +3,7 @@ var db = require('../db.js');
 
 exports.findAll = function(req, res) {
     db.get().query('SELECT * FROM dash_contents', function(err, rows){
-        if(err) return console.log(err);
+        if(err) return res.send({success: false, error: err});
         return res.send(rows);
     });
 };
@@ -11,19 +11,20 @@ exports.findAll = function(req, res) {
 //Actions
 exports.findById = function(req, res) {
     var id = req.query.id;
-    var user = req.query.user;
+    var user = req.user_id;
+    
     if(id && user){
         var sql = 'SELECT * FROM dash_contents ' +
         'WHERE dash_id = ' + db.get().escape(id) +
         '  AND user_id = ' + db.get().escape(user);
 
         db.get().query(sql, function(err, rows){
-        if(err) return console.log(err);
+        if(err) return res.send({success: false, error: err});
         return res.send(rows);
         });
     }
     else{
-        return console.log('Invalid request');
+        return res.send({success: false, error: 'Invalid request'});
     }
 };
 exports.add = function(req, res) {};
