@@ -7,7 +7,7 @@ module.exports = function(app){
     app.get('/cont/getall', auth.verifyToken, dashcontents.findAll);
     app.get('/cont/get', auth.verifyToken, dashcontents.findById);
     app.post('/cont/update', auth.verifyToken, dashcontents.update);
-    app.delete('/cont/delete/:id', auth.verifyToken, dashcontents.delete);
+    app.delete('/cont/delete', auth.verifyToken, dashcontents.delete);
 
     //Users
     var users = require('./controllers/users');

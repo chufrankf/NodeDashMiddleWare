@@ -27,6 +27,51 @@ exports.findById = function(req, res) {
         return res.send({success: false, error: 'Invalid request'});
     }
 };
-exports.add = function(req, res) {};
-exports.update = function(req, res) {};
-exports.delete = function(req, res) {};
+exports.add = function(req, res) {
+    var user = req.user_id;
+    var id = req.body.dash_id;
+    var location = req.body.location;
+
+    if(user && id && location){
+        var values = [user, id, location];
+        var sql = 'INSERT INTO users (user_id, dash_id, contents) ' +
+                  'VALUES (?,?,?)';
+        
+        db.get().query(sql, values, function(err, rows){
+            if(err) return res.send({success: false, error: err});
+            return res.send({success: true});
+        });
+    }
+};
+exports.update = function(req, res) {
+    var user = req.user_id;
+    var id = req.body.dash_id;
+    var contents = req.body.contents;
+
+    if(user && id && contents){
+        var sql = 'UPDATE users ' +
+                  'SET content = ' + db.get().escape(contents) +
+                  ' WHERE user_id = ' + db.get().escape(user) +
+                  ' AND dash_id = ' + db.get().escape(id);
+        
+        db.get().query(sql, function(err, rows){
+            if(err) return res.send({success: false, error: err});
+            return res.send({success: true});
+        });
+    }
+};
+exports.delete = function(req, res) {
+    var user = req.user_id;
+    var id = req.query.id;
+
+    if(user && id && contents){
+        var sql = 'DELETE users ' +
+                  'WHERE user_id = ' + db.get().escape(user) +
+                  ' AND dash_id = ' + db.get().escape(id);
+        
+        db.get().query(sql, function(err, rows){
+            if(err) return res.send({success: false, error: err});
+            return res.send({success: true});
+        });
+    }
+};
